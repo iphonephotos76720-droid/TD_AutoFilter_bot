@@ -16,7 +16,8 @@ from config import (
     ADMIN_IDS,
     FORCE_SUB_TEXT,
     PICS,
-    START_TEXT
+    START_TEXT,
+    UPDATES
 )
 
 from utils import safe_reply, style_text, style_btn
@@ -105,16 +106,25 @@ async def build_buttons(client: Client, channels):
                 except Exception as e:
                     print(f"[INVITE EXPORT ERROR] {chat_id}: {e}")
 
-            if invite_link:
-                buttons.append([
-                    InlineKeyboardButton(
-                        style_btn(JOIN_BUTTON_TEXT),
-                        url=invite_link
-                    )
-                ])
+            if not invite_link:
+                invite_link = UPDATES
+
+            buttons.append([
+                InlineKeyboardButton(
+                    style_btn(JOIN_BUTTON_TEXT),
+                    url=invite_link
+                )
+            ])
 
         except Exception as e:
             print(f"[BUTTON BUILD ERROR] {chat_id}: {e}")
+            # Fallback for error case
+            buttons.append([
+                InlineKeyboardButton(
+                    style_btn(JOIN_BUTTON_TEXT),
+                    url=UPDATES
+                )
+            ])
 
     # Always add retry button
     buttons.append([
