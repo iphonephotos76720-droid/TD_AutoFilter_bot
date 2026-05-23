@@ -35,10 +35,6 @@ async def channel_index_handler(client, message):
     file_id = media.file_id
     file_name = getattr(media, "file_name", "document_file")
 
-    # Only index .mkv files as per user request
-    if not file_name.lower().endswith(".mkv"):
-        return
-
     await add_file(file_id, file_name, message.caption, message_id=message.id, channel_id=DB_CHANNEL_ID)
 
 # Callback routing - handlers are now in plugins
