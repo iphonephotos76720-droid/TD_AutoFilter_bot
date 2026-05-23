@@ -69,13 +69,23 @@ async def send_all_callback_handler(client, cb):
         file_name = f['file_name']
         full_info = await get_file_by_db_id(str(f['_id']))
         caption = full_info.get('caption') or file_name
+        m_id = full_info.get('message_id')
+        c_id = full_info.get('channel_id')
 
         try:
-            m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
+            if m_id and c_id:
+                m = await client.copy_message(chat_id=cb.message.chat.id, from_chat_id=c_id, message_id=m_id, caption=caption)
+            else:
+                m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
             sent_msg_ids.append(m.id)
             await asyncio.sleep(0.5)
         except Exception as e:
             print(f"Batch Send Error: {e}")
+            try:
+                m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
+                sent_msg_ids.append(m.id)
+            except:
+                pass
 
     # Handle Auto-Delete
     delay = parse_duration(AUTO_DELETE_TIME)
@@ -103,8 +113,18 @@ async def file_callback_handler(client, cb):
     caption = file_info.get('caption') or file_name
 
     try:
-        # Send file directly to user
-        m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
+        m_id = file_info.get('message_id')
+        c_id = file_info.get('channel_id')
+
+        # Try copy_message for reliability
+        if m_id and c_id:
+            try:
+                m = await client.copy_message(chat_id=cb.message.chat.id, from_chat_id=c_id, message_id=m_id, caption=caption)
+            except Exception:
+                m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
+        else:
+            m = await client.send_document(chat_id=cb.message.chat.id, document=file_id, caption=caption)
+
         await cb.answer()
 
         # Handle Auto-Delete
