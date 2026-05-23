@@ -1,7 +1,7 @@
 import os
 from flask import Flask, send_from_directory
 
-app = Flask(__name__, static_folder='web')
+app = Flask(name, static_folder='web')
 
 @app.route('/')
 def serve_index():
@@ -11,7 +11,7 @@ def serve_index():
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
-if __name__ == "__main__":
+if name == "main":
     import os
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
