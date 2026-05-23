@@ -12,7 +12,7 @@ load_dotenv()
 
 API_ID = int(os.environ.get("API_ID", 32182319))
 API_HASH = os.environ.get("API_HASH", "773fe7e0f7247b43a79e3c2235385853")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8882534829:AAFFxM_E6V0eeUlAa0foIZjYNfulGEXJNTE")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8439412197:AAErwAaryGIjpwdOEA_Gzk9fRuFEM7AwQYc")
 
 # Search Settings
 DB_CHANNEL_ID = int(os.environ.get("DB_CHANNEL_ID", -1003539416858))
