@@ -12,7 +12,7 @@ load_dotenv()
 
 API_ID = int(os.environ.get("API_ID", 32182319))
 API_HASH = os.environ.get("API_HASH", "773fe7e0f7247b43a79e3c2235385853")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8439412197:AAErwAaryGIjpwdOEA_Gzk9fRuFEM7AwQYc")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8988270006:AAF4lbJgDiHN3y0cBZj3f4BFyRUbaJOR6zs")
 
 # Search Settings
 DB_CHANNEL_ID = int(os.environ.get("DB_CHANNEL_ID", -1003539416858))
@@ -29,7 +29,7 @@ DATABASE_NAME = os.environ.get("DATABASE_NAME", "autofilebot")
 COLLECTION_NAME = "files"
 
 # Optional settings
-OWNER_ID = int(os.environ.get("OWNER_ID", 1573111356))
+OWNER_ID = int(os.environ.get("OWNER_ID", 1208374738))
 ADMINS = [int(x) for x in os.environ.get("ADMINS", "1573111356").split(",") if x]  # multiple admins allowed ("8475661555","8475661555")
 
 # Force Subscribe Settings
