@@ -1,0 +1,133 @@
+:root {
+    --primary: #050816;
+    --secondary: #0f172a;
+    --purple-glow: rgba(168, 85, 247, 0.6);
+    --blue-glow: rgba(59, 130, 246, 0.6);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--primary);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.3);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.6);
+}
+
+body {
+    cursor: default;
+}
+
+/* Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Ambient Glows */
+.ambient-glow {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+    animation: gradient 5s ease infinite;
+}
+
+/* Card Hover Effects */
+.bot-card {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+}
+
+.bot-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+/* Skill Bar Animation */
+.skill-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Float Animation for stats cards */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.glass-card {
+    animation: float 4s ease-in-out infinite;
+}
+
+.glass-card:nth-child(2n) {
+    animation-delay: 1s;
+}
+
+.glass-card:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+/* Profile Ring Glow */
+.profile-section img {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+/* Text Glow */
+.glow-text {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+/* Reveal animations on scroll */
+section, .glass-card, .bot-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+section.active, .glass-card.active, .bot-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .lg\:ml-\[22\%\] {
+        margin-left: 0 !important;
+    }
+}

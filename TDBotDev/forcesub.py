@@ -63,7 +63,8 @@ async def is_subscribed(client: Client, user_id: int):
         except Exception as e:
             print(f"[FORCESUB ERROR] {channel_id}: {e}")
 
-            # Don't bypass all checks because of one error
+            # Fail-closed: if error occurs, assume user is not in the channel
+            unjoined.append(channel_id)
             continue
 
     subscribed = len(unjoined) == 0

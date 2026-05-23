@@ -2,7 +2,8 @@ import asyncio
 import os
 import threading
 from pyrogram import Client, filters, idle
-from config import API_ID, API_HASH, BOT_TOKEN, DB_CHANNEL_ID, OWNER_ID
+from pyrogram.types import BotCommand
+from config import API_ID, API_HASH, BOT_TOKEN, DB_CHANNEL_ID, OWNER_ID, BOT_COMMANDS
 from Database.database import add_file, get_file_by_db_id, search_files_fuzzy, get_nav_state
 from utils import safe_reply, parse_duration, auto_delete_messages, style_text, style_btn
 from app import app
@@ -135,6 +136,14 @@ if __name__ == "__main__":
         bot.start_time = time.time()
         print(f"DEBUG: Active DB_CHANNEL_ID = {DB_CHANNEL_ID}")
         await bot.start()
+
+        # Auto-set Bot Commands
+        try:
+            await bot.set_bot_commands([BotCommand(c, d) for c, d in BOT_COMMANDS])
+            print("INFO: Bot Commands set successfully")
+        except Exception as e:
+            print(f"ERROR: Failed to set bot commands: {e}")
+
         try:
             await bot.send_message(OWNER_ID, f"**bot started successfully with ForceSub & Web Service ✅**\n\n**Configured Channel ID:** `{DB_CHANNEL_ID}`")
         except Exception:

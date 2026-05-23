@@ -65,6 +65,16 @@ def get_random_pic():
 START_PIC = PICS[0]
 FORCE_PIC = PICS[1]
 
+# Bot Commands
+BOT_COMMANDS = [
+    ("start", "🚀 Start the bot"),
+    ("help", "🆘 How to use the bot"),
+    ("delete_file", "🗑️ Delete your DB files (admin)"),
+    ("broadcast", "⚡ Broadcast message (admin)"),
+    ("status", "👀 Bot statistics (admin)"),
+    ("reset", "❌ Total reset (only owner)")
+]
+
 #========================================================================
 # Don't Remove Credit Tg - @TDBotDev
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@TDBotDev
