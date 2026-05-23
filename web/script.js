@@ -176,3 +176,49 @@ function reveal() {
 
 window.addEventListener("scroll", reveal);
 reveal(); // Initial check
+
+// Snowfall Generator
+function createSnow() {
+    const snowContainer = document.getElementById('snow-container');
+    const snowCount = 50;
+
+    for (let i = 0; i < snowCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+
+        // Random properties
+        const size = Math.random() * 4 + 2 + 'px';
+        const left = Math.random() * 100 + '%';
+        const duration = Math.random() * 10 + 10 + 's';
+        const delay = Math.random() * 10 + 's';
+        const opacity = Math.random() * 0.5 + 0.3;
+
+        snowflake.style.width = size;
+        snowflake.style.height = size;
+        snowflake.style.left = left;
+        snowflake.style.animationDuration = duration;
+        snowflake.style.animationDelay = delay;
+        snowflake.style.opacity = opacity;
+
+        snowContainer.appendChild(snowflake);
+    }
+}
+
+// Mist Generator
+function createMist() {
+    const mistContainer = document.getElementById('mist-container');
+    for (let i = 0; i < 2; i++) {
+        const mist = document.createElement('div');
+        mist.className = 'mist';
+        mist.style.top = i * 50 + '%';
+        mist.style.opacity = 0.1 + (i * 0.1);
+        mist.style.animationDuration = (60 + i * 20) + 's';
+        mistContainer.appendChild(mist);
+    }
+}
+
+// Initialize Effects
+document.addEventListener('DOMContentLoaded', () => {
+    createSnow();
+    createMist();
+});
